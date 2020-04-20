@@ -171,7 +171,7 @@ def main():
                                     print(f"Do you want to delete {search_account} credentials. Click 'y' to delete or any other leter to skip" )
                                     answer = input().lower()
                                     if answer == "y":
-                                        delete_credentials(account)
+                                        delete_credentials(search_credentials)
                                         print("Account removed")
 
                                     else:
@@ -226,7 +226,7 @@ def main():
                 save_account(create_account(user_name, password))
                 print(f"Account for {user_name} has been created")
                 print("\n")
-                
+
             else:
                 print("Invalid Username")
 
