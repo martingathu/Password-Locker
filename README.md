@@ -34,9 +34,9 @@ Password Locker is a python application run in the terminal that allows users to
 | Display codes for navigation | **Successful login** | Use these short codes : sc - save an already existing account credential, cc - create a new credential, vc - view your credentials, fc -find a credential,copy - copy credentials, dl - delete an account, ex -logout |
 | Display prompt for saving an already existing credential | **Enter: sc** | Enter the site name, your username and password |
 | Display a list of credentials | **Enter: vc** | Prints a list of saved credentials |
-| Delete ab account |**Enter: dl** | delete an account | 
-| Copy credentials|**Enter: copy** | copy account credentials | 
-| Exit application |**Enter: ex** | logout the current logged in account |
+| Delete ab account |**Enter: dl** | enter account to delete, account removed | 
+| Copy credentials|**Enter: copy** | copied | 
+| Exit application |**Enter: ex** | bye |
 
 
 
