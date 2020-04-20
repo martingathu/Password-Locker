@@ -1,4 +1,33 @@
 import pyperclip # Pyperclip will allow us to copy and paste items to our clipboard 
+class User:
+    """
+    Class that generates new instances of users
+    """
+    users_list = [] #empty users list
+
+    def __init__(self, user_name, password):
+        self.user_name = user_name
+        self.password = password
+
+    def create_account(self):
+        User.users_list.append(self)
+
+    @classmethod
+    def user_exist(cls, user_name, password):
+        '''
+        Method that checks if a user exists from the users list.
+        Args:
+            user_name: user name to search if it exists
+            password: password to search if it exists
+        Returns :
+            Boolean: True or false depending if the user exists
+        '''
+        for user in cls.users_list:
+            if user.user_name == user_name and user.password == password:
+                return True
+
+        return False
+
 class Credentials:
     """
     Class that generates new instances of Credentials
@@ -74,14 +103,9 @@ class Credentials:
         return cls.credentials_list
 
     
-    # # @classmethod
-    # # def copy_username(cls,account):
-    # #     credentials_found = Credentials.find_by_account(account)
-    # #     pyperclip.copy(credentials_found.username)
-
-    # # @classmethod
-    # # def copy_password(cls,account):
-    # #     credentials_found = Credentials.find_by_account(account)
-    # #     pyperclip.copy(credentials_found.password)
+    @classmethod
+    def copy_credential(cls,account):
+        credentials_found = Credentials.find_by_account(account)
+        pyperclip.copy(credentials_found.password)
 
     
