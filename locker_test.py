@@ -160,7 +160,7 @@ class TestCredentials(unittest.TestCase):
         '''
 
         self.new_credentials.save_credentials()
-        Credentials.copy_credential("mypassword")
+        Credentials.copy_password("Instagram")
 
         self.assertEqual(self.new_credentials.password,pyperclip.paste())
 

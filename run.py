@@ -162,10 +162,26 @@ def main():
 
                                
                     elif short_code == 'dl':
+                        print("Enter the account you want to delete: ")
+                        search_account = input()
+                        if check_existing_credentials(search_account):
+                                    search_credentials = find_credentials(account)
+                                    print(f"username: {search_credentials.username} paswword: {search_credentials.password}")
+                                    print('-' * 40)
+                                    print(f"Do you want to delete {search_account} credentials. Click 'y' to delete or any other leter to skip" )
+                                    answer = input().lower()
+                                    if answer == "y":
+                                        delete_credentials(account)
+                                        print("Account removed")
 
-                        print("Enter the account you want to delete")
-                        delete_credentials(account)
-                    
+                                    else:
+                                        print("skipped")
+
+
+                        else:
+                                    print(f"{search_account} account Credentials does not exist")
+
+                                          
                     elif short_code == 'fc':
 
                             print("Enter the number you want to search for")
@@ -177,7 +193,7 @@ def main():
                                     print('-' * 20)
 
                             else:
-                                    print("That contact does not exist")
+                                    print(f"{search_account} account Credentials does not exist")
                                 
                     elif short_code == 'copy':
 
@@ -187,7 +203,7 @@ def main():
 
                                           
                     elif short_code == "ex":
-                            print("Bye .......")
+                            print(f"Goodbye...{user_name}....")
                             break
                     else:
                             print("I really didn't get that. Please use the short codes")
@@ -204,13 +220,13 @@ def main():
                 print("Username:")
                 user_name = input()
 
-            if user_name:
                 print("password:")
                 password = input()
         
                 save_account(create_account(user_name, password))
                 print(f"Account for {user_name} has been created")
                 print("\n")
+                
             else:
                 print("Invalid Username")
 
