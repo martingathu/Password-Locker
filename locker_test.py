@@ -1,6 +1,64 @@
 import unittest # Importing the unittest module
+from locker import User # import the user class
 from locker import Credentials # Importing the credentials class
 import pyperclip # Pyperclip will allow us to copy and paste items to our clipboard 
+
+class TestUsers(unittest.TestCase):
+    '''
+    Test class that defines test cases for the user class behaviours.
+    Args:
+        unittest.TestCase: TestCase class that helps in creating test cases
+    '''
+    
+    def tearDown(self):
+        '''
+        tearDown method that does clean up after test case has run
+        '''
+        User.users_list = []
+    
+    def setUp(self):
+        '''
+        Set up method to run before each test cases.
+        '''
+        self.new_user = User("Martin", "gathu123") # create user object
+
+    def test_init(self):
+        '''
+        test_init test case to test if the object is initialized properly
+        '''
+        self.assertEqual(self.new_user.user_name, "Martin")
+        self.assertEqual(self.new_user.password, "gathu123")
+
+    def test_create_account(self):
+        '''
+        test_create_account test case to test if the user object is saved into
+        the user list
+        '''
+        self.new_user.create_account() # saving the new user
+        self.assertEqual(len(User.users_list), 1)
+
+    def test_save_multiple_accounts(self):
+        '''
+        test_save_multiple_user to check if we can save multiple users
+        objects to our user_list
+        '''
+        self.new_user.create_account()
+        test_user = User("mary", "123mary") #new user
+        test_user.create_account()
+        self.assertEqual(len(User.users_list), 2)
+
+    def test_account_exists(self):
+        '''
+        test to check if we can return a Boolean  if we cannot find the credentials.
+        '''
+
+        self.new_user.create_account()
+        test_user = User("mary", "123mary") # new user
+        test_user.create_account()
+
+        user_exists = User.user_exist("mary", "123mary")
+
+        self.assertTrue(user_exists)
 
 class TestCredentials(unittest.TestCase):
 
@@ -95,25 +153,16 @@ class TestCredentials(unittest.TestCase):
 
         self.assertEqual(Credentials.display_credentials(),Credentials.credentials_list)
 
-    # def test_copy_username(self):
-    #     '''
-    #     Test to confirm that we are copying the username from a found account
-    #     '''
+    
+    def test_copy_password(self):
+        '''
+        Test to confirm that we are copying the password from a found account
+        '''
 
-    #     self.new_credentials.save_credentials()
-    #     Credentials.copy_username("martingathu")
+        self.new_credentials.save_credentials()
+        Credentials.copy_credential("mypassword")
 
-    #     self.assertEqual(self.new_credentials.password,pyperclip.paste())
-
-    # def test_copy_password(self):
-    #     '''
-    #     Test to confirm that we are copying the password from a found account
-    #     '''
-
-    #     self.new_credentials.save_credentials()
-    #     Credentials.copy_password("mypassword")
-
-    #     self.assertEqual(self.new_credentials.password,pyperclip.paste())
+        self.assertEqual(self.new_credentials.password,pyperclip.paste())
 
 
 if __name__ == '__main__':
